@@ -64,6 +64,7 @@
 		51049BAF272FD29E00F009B4 /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				511C7A4227315D6300DA3A0B /* Model */,
 				51255237273048560028DA8B /* VC */,
 				512552362730483C0028DA8B /* View */,
 				512552352730482A0028DA8B /* Delegate */,
@@ -71,6 +72,14 @@
 				51049BBE272FD2A300F009B4 /* Info.plist */,
 			);
 			path = Task;
+			sourceTree = "<group>";
+		};
+		511C7A4227315D6300DA3A0B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5125523827304B4D0028DA8B /* List.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		512552352730482A0028DA8B /* Delegate */ = {
@@ -87,7 +96,6 @@
 			children = (
 				51049BBB272FD2A300F009B4 /* LaunchScreen.storyboard */,
 				51049BB6272FD29E00F009B4 /* Main.storyboard */,
-				5125523827304B4D0028DA8B /* List.swift */,
 				5125523027303FB40028DA8B /* TaskCell.xib */,
 			);
 			path = View;

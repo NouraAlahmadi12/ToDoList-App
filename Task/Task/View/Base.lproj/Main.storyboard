@@ -86,6 +86,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Do..!" id="wEC-3r-Ad3">
+                        <barButtonItem key="leftBarButtonItem" title="DelletAll" image="trash.circle" catalog="system" id="9xy-fH-3Tl">
+                            <color key="tintColor" red="0.17558881640434265" green="0.5139203667640686" blue="0.64694762229919434" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="DelletAll:" destination="QMD-gI-zqc" id="J6S-MO-qaC"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add" image="plus.viewfinder" catalog="system" id="hep-VK-Y8E">
                             <connections>
                                 <segue destination="fdL-l9-Sio" kind="show" id="W55-Vf-SOA"/>
@@ -184,6 +190,7 @@
         <image name="list.star" catalog="system" width="128" height="94"/>
         <image name="plus.viewfinder" catalog="system" width="128" height="115"/>
         <image name="target" width="512" height="512"/>
+        <image name="trash.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

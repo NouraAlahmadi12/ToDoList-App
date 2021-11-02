@@ -9,17 +9,26 @@ import UIKit
 
 
 class TaskTableVC: UITableViewController {
-    var taskToDo : List!
+    var taskToDo = List()
     var selectedTask : Task?
 
+    @IBAction func DeletAll(_ sender: Any) {
+        taskToDo.tasks.removeAll()
+        tableView.reloadData()
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        tableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCellID")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -40,6 +49,7 @@ class TaskTableVC: UITableViewController {
         return cell
     }
     
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
@@ -58,17 +68,19 @@ class TaskTableVC: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            taskToDo.tasks.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
+        tableView.reloadData()
+//        UserDefaults.standard.set(taskToDo , forKey: "taskToDo")
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
@@ -85,14 +97,18 @@ class TaskTableVC: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let addTaskVC = segue.destination as! AddTaskVC
+        addTaskVC.taskToDo = self.taskToDo
+        
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
