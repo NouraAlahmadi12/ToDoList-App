@@ -12,6 +12,7 @@ class TaskTableVC: UITableViewController {
     var taskToDo = List()
     var selectedTask : Task!
     var selectedCell : Int!
+    
     @IBOutlet var TaskTable: UITableView!
     
     @IBAction func DeletAll(_ sender: Any) {
