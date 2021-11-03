@@ -10,22 +10,26 @@ import UIKit
 
 class TaskTableVC: UITableViewController {
     var taskToDo = List()
-    var selectedTask : Task?
-
+    var selectedTask : Task!
+    var selectedCell : Int!
+    @IBOutlet var TaskTable: UITableView!
+    
     @IBAction func DeletAll(_ sender: Any) {
         taskToDo.tasks.removeAll()
         tableView.reloadData()
-
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCellID")
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+         self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        tableView.rowHeight = 95
     }
     override func viewDidAppear(_ animated: Bool) {
         tableView.reloadData()
@@ -46,10 +50,14 @@ class TaskTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCellID", for: indexPath) as! TaskCell
         cell.taskName?.text = taskToDo.tasks[indexPath.row].taskTitle
+        cell.taskDetails?.text = taskToDo.tasks[indexPath.row].taskDetails
+        cell.taskDate?.text = taskToDo.tasks[indexPath.row].taskDate
+        cell.taskTime?.text = taskToDo.tasks[indexPath.row].taskTime
+        cell.taskPriorty?.text = taskToDo.tasks[indexPath.row].taskPriorty
         return cell
     }
     
-    
+
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
@@ -81,7 +89,10 @@ class TaskTableVC: UITableViewController {
 //        UserDefaults.standard.set(taskToDo , forKey: "taskToDo")
     }
     
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedCell = indexPath.row
+       performSegue(withIdentifier: "editeID", sender: self)
+    }
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
@@ -102,13 +113,17 @@ class TaskTableVC: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if(segue.identifier == "AddID"){
+            let addTaskVC = segue.destination as! AddTaskVC
+                addTaskVC.taskToDo = taskToDo
+        }
+        else if (segue.identifier == "editeID"){
         let addTaskVC = segue.destination as! AddTaskVC
-        addTaskVC.taskToDo = self.taskToDo
+            addTaskVC.taskToDo = taskToDo
+            addTaskVC.selecteCell = selectedCell
+        }
         
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    
-
 }
